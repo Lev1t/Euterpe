@@ -1,6 +1,14 @@
-<p>filter works!</p>
 <div>
-    <form [formGroup]="tracksFilter" (ngSubmit)="onSubmit()">
-        <button type="submit">Get tracks</button>
-    </form>
+  <form [formGroup]="tracksFilter" (ngSubmit)="onSubmit()">
+    <label>Genre:</label>
+    <select formControlName="genre">
+        <option *ngFor="let genre of genres" [ngValue]="genre">
+          {{ genre.title }}
+        </option>
+    </select>
+
+    <p>{{ tracksFilter.value | json }}</p>
+    
+    <div><button type="submit">Get tracks</button></div>
+  </form>
 </div>
