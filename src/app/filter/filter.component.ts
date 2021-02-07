@@ -28,7 +28,10 @@ export class FilterComponent implements OnInit {
               private genreService: GenreService) {}
 
   ngOnInit(): void {
-    this.genreService.getGenres().subscribe(genres => this.genres = genres);
+    this.genreService.getGenres().subscribe(genres => {
+      this.genres = genres
+      this.tracksFilter.patchValue({genre : this.genres.find(x => x.id == 39)});
+    });
   }
 
   onSubmit(): void {
