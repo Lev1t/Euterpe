@@ -1,0 +1,10 @@
+{
+    "/api/genres" : {
+        "target" : "http://clubtone.net/music/club_music/2",
+        "secure" : false,
+        "pathRewrite" : {
+            "^/api/genres" : ""
+        },
+        "changeOrigin" : true
+    }
+}

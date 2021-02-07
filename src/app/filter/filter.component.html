@@ -1,14 +1,68 @@
 <div>
   <form [formGroup]="tracksFilter" (ngSubmit)="onSubmit()">
-    <label>Genre:</label>
-    <select formControlName="genre">
-        <option *ngFor="let genre of genres" [ngValue]="genre">
-          {{ genre.title }}
-        </option>
-    </select>
 
-    <p>{{ tracksFilter.value | json }}</p>
+    <div>
+      <label>
+        Genre:
+        <select formControlName="genre">
+          <option *ngFor="let genre of genres" [ngValue]="genre">
+            {{ genre.title }}
+          </option>
+      </select>
+      </label>
+    </div>
+
+    <div>
+      <label>
+        Просмотры:
+        <input type="number" formControlName="views">
+      </label>
+    </div>
+
+    <div>
+      <label>
+        Загрузки:
+        <input type="number" formControlName="downloads">
+      </label>
+    </div>
+
+    <div>
+      <label>
+        Загрузки/Просмотры:
+        <input type="number" formControlName="dloadsViewsRatio">
+      </label>
+    </div>
+
+    <div>
+      <label>
+        Кол-во комментов:
+        <input type="number" formControlName="comments">
+      </label>
+    </div>
+
+    <div>
+      <label>
+        Кол-во оценок:
+        <input type="number" formControlName="gradeCount">
+      </label>
+    </div>
+
+    <div>
+      <label>
+        Оценки/Просмотры:
+        <input type="number" formControlName="gradeViewsRatio">
+      </label>
+    </div>
+
+    <div>
+      <label>
+        320+:
+        <input type="checkbox" formControlName="bitrate320">
+      </label>
+    </div>
+
     
+    <p>{{ tracksFilter.value | json }}</p>
     <div><button type="submit">Get tracks</button></div>
   </form>
 </div>

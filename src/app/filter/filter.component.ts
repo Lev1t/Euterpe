@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { Genre } from '../interfaces/Genre';
+import { GenreService } from '../genre.service';
 
 @Component({
   selector: 'app-filter',
@@ -9,18 +10,26 @@ import { Genre } from '../interfaces/Genre';
 })
 export class FilterComponent implements OnInit {
   genres: Genre[] = [
-    { id: 1, title: 'Techno' },
-    { id: 2, title: 'Chillout' },
-    { id: 3, title: 'Progressive' },
+    { id: 0, title: 'Loading' },
   ];
   
   tracksFilter = this.formBuilder.group({
-    genre: [this.genres[0]]
+    genre: [this.genres[0]],
+    views: [null],
+    downloads: [null],
+    dloadsViewsRatio: [null],
+    comments: [null],
+    gradeCount: [null],
+    gradeViewsRatio: [null],
+    bitrate320: [false]
   });
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(private formBuilder: FormBuilder,
+              private genreService: GenreService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.genreService.getGenres().subscribe(genres => this.genres = genres);
+  }
 
   onSubmit(): void {
     console.log('onSubmit');
