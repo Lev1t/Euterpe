@@ -1,7 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+
 import { Genre } from '../interfaces/Genre';
 import { GenreService } from '../genre.service';
+import { Filter } from '../interfaces/filter';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-filter',
@@ -25,7 +29,8 @@ export class FilterComponent implements OnInit {
   });
 
   constructor(private formBuilder: FormBuilder,
-              private genreService: GenreService) {}
+              private genreService: GenreService,
+              private router: Router) {}
 
   ngOnInit(): void {
     this.genreService.getGenres().subscribe(genres => {
@@ -35,6 +40,17 @@ export class FilterComponent implements OnInit {
   }
 
   onSubmit(): void {
-    console.log('onSubmit');
+    const filter: Filter = {
+      genre: this.tracksFilter['genre'].value,
+      views: this.tracksFilter['views'].value,
+      downloads: this.tracksFilter['downloads'].value,
+      dloadsViewsRatio: this.tracksFilter['dloadsViewsRatio'].value,
+      comments: this.tracksFilter['comments'].value,
+      gradeCount: this.tracksFilter['gradeCount'].value,
+      gradeViewsRatio: this.tracksFilter['gradeViewsRatio'].value,
+      bitrate320: this.tracksFilter['bitrate320'].value
+    }
+    
+    this.router.navigateByUrl('/tracks', {state: {filter: filter}});
   }
 }
